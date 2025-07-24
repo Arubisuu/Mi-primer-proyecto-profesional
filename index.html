@@ -1,10 +1,432 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <title>Mi Página</title>
-  </head>
-  <body>
-    <h1>¡Hola mundo!</h1>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Presentacion - Mariana Galindo</title>
+  <style>
+    .gif-footer {
+  width: 50px;
+  margin-top: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+    :root {
+      --color-fondo: #f4f6fc;
+      --color-texto: #2d2f39;
+      --color-acento: #ed3ab7;
+      --color-acento2: #4f46e5;
+    }
+
+    body.dark {
+      --color-fondo: #1f1f2e;
+      --color-texto: #f9fafb;
+      --color-acento: #c084fc;
+      --color-acento2: #818cf8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      transition: background 0.4s, color 0.4s;
+      cursor: url('https://i.ibb.co/xKNR5mxt/99rfhfgjgh87.png'), auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(to right, var(--color-acento), var(--color-acento2));
+      color: white;
+    }
+
+    header img {
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 1rem;
+    }
+
+    nav {
+      background: #130b1475;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    nav a {
+      color: #f3f4f6;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--color-acento);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: background 0.4s;
+    }
+
+    body.dark section {
+      background: #2a2a3b;
+    }
+
+    h2 {
+      color: var(--color-acento);
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    button {
+      background: var(--color-acento);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      margin: 0.5rem 0.3rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: var(--color-acento2);
+    }
+
+    .cv-button {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #3b2138;
+      color: #ccc;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background:#111827;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgb(0, 0, 0);
+
+    }
+
+    #btnSubir {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--color-acento2);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 0.7rem 1rem;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 999;
+      transition: background 0.3s ease;
+    }
+
+    #btnSubir:hover {
+      background-color: var(--color-acento);
+    }
+    
+    
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #1f2937;
+  color: #fff;
+  text-align: center;
+  padding: 8px 10px;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 110%; 
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #1f2937 transparent transparent transparent;
+}
+
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+    
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #e5e7eb; 
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-acento); 
+  border-radius: 10px;
+  border: 2px solid #f4f6fc;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-acento2); 
+}
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" onclick="toggleTheme()">🌗 Cambiar tema</button>
+
+  <header>
+    <img src="https://i.ibb.co/ymfhwGVT/Whats-App-Image-2025-07-23-at-6-39-55-PM.jpg" alt="Foto de perfil" />
+    <h1>Mariana Galindo</h1>
+    <p>Desarrolladora Web | Basico en Roblox Studio | Diseñadora Creativa</p>
+  </header>
+
+  <nav>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#habilidades">Habilidades</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#galeria">Galería</a>
+    <a href="#cv">Currículum</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <div class="container">
+
+    <section id="sobre-mi">
+      <h2>HOLA!</h2>
+      <p>Mi nombre es Mariana Galindo, soy estudiante de formación técnica con enfoque en informática, especialmente en el área de programación. Actualmente me encuentro en proceso de aprendizaje continuo pero ya poseo conocimientos sólidos en diversos lenguajes de programación, Aparte, tengo experiencia en diseño gráfico y creativo lo que me permite combinar la lógica del desarrollo con una visión estética funcional. </p>
+    </section>
+
+    <section id="habilidades">
+      <h2>Habilidades</h2>
+      <h3>Programacion</h3>
+      <ul>
+        <li>HTML5, CSS3, diseño responsivo</li>
+        <li>JavaScript básico</li>
+        <li>Lua (Roblox Studio)</li>
+        <li>Diseño UI/UX y edición de imágenes</li>
+        <li>Trabajo colaborativo en proyectos</li>
+        <li>C++ (visual studio)</li>
+      </ul>
+      <h3>Diseño</h3>
+      <ul>
+        <li>Diseño Grafico</li>
+        <li>Power point</li>
+        <li>Word</li>
+        <li>Photoshop</li>
+        <li>Proyectos personalizados</li>
+        <li>Dibujo digital</li>
+        <li>capacidad creativa</li>
+      </ul>
+      <h3>Tecnico</h3>
+      <ul>
+        <li>Crimpar</li>
+        <li>Limpieza de pc</li>
+        <li>Limpienza de movil</li>
+        <li>Soldar</li>
+        <li>Armar circuitos</li>
+      </ul>
+      <h3>Aprendizaje</h3>
+      <ul>
+        <li>Basico</li>
+        <li>Bachillerato</li>
+        <li>Ingles Intermedio</li>
+        <li>Quimica de compuestos</li>
+      </ul>
+    </section>
+
+    <section id="proyectos">
+      <h2>Proyectos destacados</h2>
+      <ul>
+        <li><strong>Obby en Roblox:</strong> con acertijos y parkour.</li>
+        <li><strong>Sitio web para portafolio personal y otras web diversas:</strong> como esta misma página.</li>
+        <li><strong>Blog:</strong> enfocado en felinos.</li>
+      </ul>
+    </section>
+
+    <section id="galeria">
+  <h2>Galería</h2>
+  <div class="gallery">
+    <div class="tooltip">
+      <img src="https://i.ibb.co/NnFqFXkJ/3242424.png" alt="Proyecto 1">
+      <span class="tooltiptext">Mi Blog</span>
+    </div>
+
+    <div class="tooltip">
+      <img src="https://i.ibb.co/HDFnR3g0/RSmiobby.png" alt="Proyecto 2">
+      <span class="tooltiptext">Desarrollo de juego en Roblox Studio</span>
+    </div>
+
+    <div class="tooltip">
+      <img src="https://i.ibb.co/hFYkZw3s/VB-6-0.png" alt="Proyecto 3">
+      <span class="tooltiptext">Lista de actividades en VB6 </span>
+    </div>
+
+    <div class="tooltip">
+      <img src="https://i.ibb.co/fGVtzCjR/Aprendiendo-PY.png" alt="Proyecto 4">
+      <span class="tooltiptext">Reloj digital, en python</span>
+    </div>
+
+    <div class="tooltip">
+      <img src="https://i.ibb.co/zhtss59c/El-principito.png" alt="Proyecto 5">
+      <span class="tooltiptext">Practica de Html y diseños </span>
+    </div>
+
+    <div class="tooltip">
+      <img src="https://i.ibb.co/DPXhkDFh/VB-6-0-2.png" alt="Proyecto 6">
+      <span class="tooltiptext">Mensaje dinamico en VB6</span>
+    </div>
+
+  </div>
+</section>
+
+    <section id="cv">
+      <h2>Currículum</h2>
+      <h3>Formación</h3>
+      <ul>
+        <li>Curso de desarrollo web (HTML, CSS, JavaScript)</li>
+        <li>scripting Lua para Roblox</li>
+        <li>Fundamentos de programacion.</li>
+        <li>Titulo de Bachiller</li>
+      </ul>
+
+      <h3>Experiencia</h3>
+      <ul>
+        <li>Freelancer en diseño de páginas personales (2023-2025)</li>
+        <li>Desarrollador de juegos en Roblox (proyectos personales y en equipo)</li>
+        <li>Proyectos independientes</li>
+      </ul>
+
+      <a href="cv-arubisu.pdf" class="cv-button" download><button>📄 Descargar CV (PDF)</button></a>
+    </section>
+
+   <section id="contacto">
+      <h2>Contacto</h2>
+      <p>¿ tienes una propuesta? ¡Estoy disponible!</p>
+      <p>Email: <a href="mariana.galindo@overseeric.com">mariana.galindo@overseeric.com</a></p>
+      <p>Whatsapp: <a href="096 303 3886">096 303 3886</a></p>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 Overseeric. Todos los derechos reservados.</p>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOLGhdLQ6swPU193v4U7KwSDYfVyrrm2GhEM1Y2FosI5lWZnU3YG3xxXU8nN09-yUwWQ74rsRH4uNgd-4zw7I1SMZ62TTkUUSsMAsnV3gh8eC8JpFVZi2YqPDqWDFkP0sOFN5rGsbdVMEV/s1600/tumblr_m4tll4o4A11qid2nw.gif" alt="GIF decorativo" class="gif-footer">
+  </footer>
+
+<!-- JavaScript -->
+  
+  <script>
+
+    function cambiarFondo() {
+      document.body.style.backgroundColor =
+        document.body.style.backgroundColor === "lightblue" ? "var(--color-fondo)" : "lightblue";
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
+  
+    
+ 
+</script>
+<script>
+  // Mostrar botón al hacer scroll
+  window.onscroll = function() {
+    const btn = document.getElementById("btnSubir");
+    btn.style.display = window.scrollY > 300 ? "block" : "none";
+  };
+
+  // Función para volver arriba
+  function subirPagina() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+  
+<button id="btnSubir" onclick="subirPagina()">˄</button>
+</body>
 </html>
